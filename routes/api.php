@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\studentController;
 
-Route::get('/students', [studentController::class,'index']);
+Route::get('/students', [studentController::class,'getAll']);
 
 Route::get('/students/{id}', [studentController::class,'getStudentById']);
 
-Route::post('/students', [studentController::class,'store']);
+Route::post('/students', [studentController::class,'create']);
 
 
 Route::put('/students/{id}', function() {
@@ -22,7 +22,5 @@ Route::put('/students/{id}', function() {
 // });
 
 
-Route::delete('/students/{id}', function() {
-    return 'Eliminando Estudiante';
-});
+Route::delete('/students/{id}', [studentController::class,'deleteStudentById']);
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class studentController extends Controller
 {
-    public function index()
+    public function getAll()
     {
         $student = Student::all();
         if($student->isEmpty()){
@@ -29,7 +29,7 @@ class studentController extends Controller
         }
     }
 
-    public function store(Request $request){
+    public function create(Request $request){
 
         $validator = Validator::make($request->all(),[
             'name' => 'required|max:255',
@@ -92,5 +92,29 @@ class studentController extends Controller
             'errors' => ['Estudiante no encontrado']
         ];
         return response()->json($data, 200);
+    }
+
+    public function deleteStudentById($id)
+    {
+        $student = Student::find($id);
+        if(!$student){
+            $data = [
+                'message' => 'Estudiante no encontrado',
+                'status' => 404,
+                'data' => null,
+                'errors' => ['Estudiante no encontrado']
+            ];
+            return response()->json($data, 200);
+        }       
+
+        $student->delete();
+        
+        $data = [
+            'message' => 'Estudiante Eliminado',
+            'status' => 200,
+            'data' => $student,
+            'errors' => null
+           ];
+           return response()->json($data,200);
     }
 }
