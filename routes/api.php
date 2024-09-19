@@ -3,17 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/students', function() {
-    return 'Obteniendo Lista de Estudiantes';
-});
+use App\Http\Controllers\Api\studentController;
 
-Route::get('/students/{id}', function() {
-    return 'Obteniendo a Estudiante';
-});
+Route::get('/students', [studentController::class,'index']);
 
-Route::post('/students', function() {
-    return 'Creando Estudiante';
-});
+Route::get('/students/{id}', [studentController::class,'getStudentById']);
+
+Route::post('/students', [studentController::class,'store']);
 
 
 Route::put('/students/{id}', function() {
