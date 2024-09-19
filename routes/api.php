@@ -3,30 +3,20 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/students', function() {
-    return 'Obteniendo Lista de Estudiantes';
-});
+use App\Http\Controllers\Api\studentController;
 
-Route::get('/students/{id}', function() {
-    return 'Obteniendo a Estudiante';
-});
+Route::get('/students', [studentController::class,'getAll']);
 
-Route::post('/students', function() {
-    return 'Creando Estudiante';
-});
+Route::get('/students/{id}', [studentController::class,'getStudentById']);
+
+Route::post('/students', [studentController::class,'create']);
 
 
-Route::put('/students/{id}', function() {
-    return 'Actualizando Estudiante';
-});
+Route::put('/students/{id}', [studentController::class, 'updateStudent']);
 
 
-// Route::path('/students/{id}', function() {
-//     return 'Actualizando parte de Estudiante';
-// });
+Route::patch('/students/{id}', [studentController::class,'updateStudentPartial']);
 
 
-Route::delete('/students/{id}', function() {
-    return 'Eliminando Estudiante';
-});
+Route::delete('/students/{id}', [studentController::class,'deleteStudentById']);
 
